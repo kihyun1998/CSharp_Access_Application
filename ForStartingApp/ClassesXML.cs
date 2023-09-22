@@ -6,10 +6,21 @@ using System.Threading.Tasks;
 
 namespace ForStartingApp
 {
-    class SavePathXML
+    class ApplicationXML
     {
         public string _FullPath;
         public string _FileName;
         public string _ExePath;
+    }
+
+    class UserStateXML
+    {
+        public string _UserName;
+        public string _IPAddress;
+    }
+
+    class PassworldXML
+    {
+        public string _Passworld;
     }
 }

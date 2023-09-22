@@ -29,14 +29,38 @@ namespace ForStartingApp
         {
             InitializeComponent();
             form1 = this;
-            if (File.Exists(HandleXML._xmlPath))
+            
+            if (File.Exists(UseApplication._Path))
             {
-                HandleXML.Load();
+                UseApplication.Load();
             }
             else
             {
-                SavePathXML spx = new SavePathXML();
-                HandleXML.Save(spx);
+                ApplicationXML appX = new ApplicationXML();
+                UseApplication.Save(appX);
+            }
+
+            if (File.Exists(UseUserState._Path))
+            {
+                if (UseUserState.IsRegist())
+                {
+                    UseUserState.Load();
+                    pBoxGreen.Visible = true;
+                    pBoxRed.Visible = false;
+                    lblState.Text = "등록";
+                }
+                else
+                {
+                    pBoxGreen.Visible = false;
+                    pBoxRed.Visible = true;
+                    lblState.Text = "미등록";
+                }
+            }
+            else
+            {
+                pBoxGreen.Visible = false;
+                pBoxRed.Visible = true;
+                lblState.Text = "미등록";
             }
             
         }
@@ -45,11 +69,11 @@ namespace ForStartingApp
         {
             string type = "PUTTY";
 
-            _user = tBoxId.Text;
-            _password = tBoxPw.Text;
+            _user = tBoxUserName.Text;
+            _password = tBoxPassword.Text;
             _IP = tBoxIp.Text;
-            _path = HandleXML.GetPath(type);
-            _name = HandleXML.GetName(type);
+            _path = UseApplication.GetPath(type);
+            _name = UseApplication.GetName(type);
 
 
             if (_path == string.Empty)
@@ -84,11 +108,11 @@ namespace ForStartingApp
         {
             string type = "FILEZILLA";
 
-            _user = tBoxId.Text;
-            _password = tBoxPw.Text;
+            _user = tBoxUserName.Text;
+            _password = tBoxPassword.Text;
             _IP = tBoxIp.Text;
-            _path = HandleXML.GetPath(type);
-            _name = HandleXML.GetName(type);
+            _path = UseApplication.GetPath(type);
+            _name = UseApplication.GetName(type);
 
             if (_path == string.Empty)
             {
@@ -121,11 +145,11 @@ namespace ForStartingApp
         {
             string type = "MOBAXTERM";
 
-            _user = tBoxId.Text;
-            _password = tBoxPw.Text;
+            _user = tBoxUserName.Text;
+            _password = tBoxPassword.Text;
             _IP = tBoxIp.Text;
-            _path = HandleXML.GetPath(type);
-            _name = HandleXML.GetName(type);
+            _path = UseApplication.GetPath(type);
+            _name = UseApplication.GetName(type);
 
             if (_path == string.Empty)
             {
@@ -159,12 +183,12 @@ namespace ForStartingApp
         {
             string type = "PUTTY";
             List<string> paths = getFilePaths();
-            SavePathXML spx = new SavePathXML();
+            ApplicationXML spx = new ApplicationXML();
             spx._FullPath = paths[0];
             spx._FileName = paths[1];
             spx._ExePath = paths[2];
 
-            HandleXML.Modify(spx, type);
+            UseApplication.Modify(spx, type);
 
             tBoxPuttyPath.Text = paths[0];
         }
@@ -173,12 +197,12 @@ namespace ForStartingApp
         {
             string type = "FILEZILLA";
             List<string> paths = getFilePaths();
-            SavePathXML spx = new SavePathXML();
+            ApplicationXML spx = new ApplicationXML();
             spx._FullPath = paths[0];
             spx._FileName = paths[1];
             spx._ExePath = paths[2];
 
-            HandleXML.Modify(spx, type);
+            UseApplication.Modify(spx, type);
 
             tBoxFileZillaPath.Text = paths[0];
         }
@@ -187,19 +211,15 @@ namespace ForStartingApp
         {
             string type = "MOBAXTERM";
             List<string> paths = getFilePaths();
-            SavePathXML spx = new SavePathXML();
-            spx._FullPath = paths[0];
-            spx._FileName = paths[1];
-            spx._ExePath = paths[2];
+            ApplicationXML appX = new ApplicationXML();
+            appX._FullPath = paths[0];
+            appX._FileName = paths[1];
+            appX._ExePath = paths[2];
 
-            HandleXML.Modify(spx, type);
+            UseApplication.Modify(appX, type);
 
             tBoxMobaXtermPath.Text = paths[0];
         }
-
-
-
-
 
         /////////////////
         /// paths[0] = 전체 경로
@@ -231,6 +251,30 @@ namespace ForStartingApp
             }
 
             return paths;
+        }
+
+        private void btnRegist_Click(object sender, EventArgs e)
+        {
+            UserStateXML usX = new UserStateXML();
+            usX._UserName = tBoxUserName.Text;
+            usX._IPAddress = tBoxIp.Text;
+
+            UseUserState.Save(usX);
+            if (UseUserState.IsRegist())
+            {
+                UseUserState.Load();
+                pBoxGreen.Visible = true;
+                pBoxRed.Visible = false;
+                lblState.Text = "등록";
+                MessageBox.Show("등록되었습니다 !");
+            }
+            else
+            {
+                pBoxGreen.Visible = false;
+                pBoxRed.Visible = true;
+                lblState.Text = "미등록";
+                MessageBox.Show("접속 아이디 또는 아이피를 입력해주세요.");
+            }
         }
     }
 }
