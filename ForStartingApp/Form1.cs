@@ -96,7 +96,8 @@ namespace ForStartingApp
                 process.EnableRaisingEvents = false;
                 process.StartInfo = cmd;
                 process.Start();
-                process.StandardInput.Write(string.Format("cd {0} && {1} -ssh {2}@{3} 22 -pw {4}\r\n", _path, _name, _user, _IP, _password));
+                //process.StandardInput.Write(string.Format("cd {0} && {1} -ssh {2}@{3} 22 -pw {4}\r\n", _path, _name, _user, _IP, _password));
+                process.StandardInput.Write(string.Format("cd {0} && {1} -ssh {2}@{3} 22 -pwfile C:\\TEMP\\Password.txt \r\n", _path, _name, _user, _IP));
                 process.StandardInput.Close();
 
                 process.WaitForExit();
@@ -258,6 +259,12 @@ namespace ForStartingApp
             UserStateXML usX = new UserStateXML();
             usX._UserName = tBoxUserName.Text;
             usX._IPAddress = tBoxIp.Text;
+
+            PassworldTXT passT = new PassworldTXT();
+            passT._Passworld = tBoxPassword.Text;
+
+            UsePassword.Save(passT);
+
 
             UseUserState.Save(usX);
             if (UseUserState.IsRegist())

@@ -19,7 +19,7 @@ namespace ForStartingApp
         public string _IPAddress;
     }
 
-    class PassworldXML
+    class PassworldTXT
     {
         public string _Passworld;
     }
