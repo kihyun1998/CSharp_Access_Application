@@ -1,0 +1,10 @@
+C:\Users\User\source\repos\ForStartingApp\ForStartingApp\bin\Debug\ForStartingApp.exe.config
+C:\Users\User\source\repos\ForStartingApp\ForStartingApp\bin\Debug\ForStartingApp.exe
+C:\Users\User\source\repos\ForStartingApp\ForStartingApp\bin\Debug\ForStartingApp.pdb
+C:\Users\User\source\repos\ForStartingApp\ForStartingApp\obj\Debug\ForStartingApp.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\ForStartingApp\ForStartingApp\obj\Debug\ForStartingApp.Form1.resources
+C:\Users\User\source\repos\ForStartingApp\ForStartingApp\obj\Debug\ForStartingApp.Properties.Resources.resources
+C:\Users\User\source\repos\ForStartingApp\ForStartingApp\obj\Debug\ForStartingApp.csproj.GenerateResource.cache
+C:\Users\User\source\repos\ForStartingApp\ForStartingApp\obj\Debug\ForStartingApp.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\ForStartingApp\ForStartingApp\obj\Debug\ForStartingApp.exe
+C:\Users\User\source\repos\ForStartingApp\ForStartingApp\obj\Debug\ForStartingApp.pdb
