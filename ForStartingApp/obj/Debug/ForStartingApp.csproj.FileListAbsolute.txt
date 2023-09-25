@@ -8,3 +8,4 @@ C:\Users\User\source\repos\ForStartingApp\ForStartingApp\obj\Debug\ForStartingAp
 C:\Users\User\source\repos\ForStartingApp\ForStartingApp\obj\Debug\ForStartingApp.csproj.CoreCompileInputs.cache
 C:\Users\User\source\repos\ForStartingApp\ForStartingApp\obj\Debug\ForStartingApp.exe
 C:\Users\User\source\repos\ForStartingApp\ForStartingApp\obj\Debug\ForStartingApp.pdb
+C:\Users\User\source\repos\ForStartingApp\ForStartingApp\obj\Debug\ForStartingApp.InputBox.resources

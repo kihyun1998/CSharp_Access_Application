@@ -63,6 +63,16 @@ namespace ForStartingApp.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap check {
+            get {
+                object obj = ResourceManager.GetObject("check", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap Green_Light_PNG_Transparent_Image {
             get {
                 object obj = ResourceManager.GetObject("Green-Light-PNG-Transparent-Image", resourceCulture);
@@ -76,6 +86,16 @@ namespace ForStartingApp.Properties {
         internal static System.Drawing.Bitmap Light_Effect_Transparent_Background {
             get {
                 object obj = ResourceManager.GetObject("Light-Effect-Transparent-Background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap remove {
+            get {
+                object obj = ResourceManager.GetObject("remove", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

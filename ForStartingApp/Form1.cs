@@ -10,6 +10,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Xml;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace ForStartingApp
 {
@@ -47,20 +48,17 @@ namespace ForStartingApp
                     UseUserState.Load();
                     pBoxGreen.Visible = true;
                     pBoxRed.Visible = false;
-                    lblState.Text = "등록";
                 }
                 else
                 {
                     pBoxGreen.Visible = false;
                     pBoxRed.Visible = true;
-                    lblState.Text = "미등록";
                 }
             }
             else
             {
                 pBoxGreen.Visible = false;
                 pBoxRed.Visible = true;
-                lblState.Text = "미등록";
             }
             
         }
@@ -70,7 +68,7 @@ namespace ForStartingApp
             string type = "PUTTY";
 
             _user = tBoxUserName.Text;
-            _password = tBoxPassword.Text;
+
             _IP = tBoxIp.Text;
             _path = UseApplication.GetPath(type);
             _name = UseApplication.GetName(type);
@@ -97,7 +95,14 @@ namespace ForStartingApp
                 process.StartInfo = cmd;
                 process.Start();
                 //process.StandardInput.Write(string.Format("cd {0} && {1} -ssh {2}@{3} 22 -pw {4}\r\n", _path, _name, _user, _IP, _password));
-                process.StandardInput.Write(string.Format("cd {0} && {1} -ssh {2}@{3} 22 -pwfile C:\\TEMP\\Password.txt \r\n", _path, _name, _user, _IP));
+
+                //process.StandardInput.WriteLine(string.Format("openssl pkeyutl -decrypt -inkey {0} -in {1} -out {2} && cd {3} && {4} -ssh {5}@{6} 22 -pwfile {7} && del {8}",
+                //    UsePassword._PrivPath, UsePassword._ENCPath, UsePassword._Path, _path, _name, _user, _IP,UsePassword._Path, UsePassword._Path));
+                process.StandardInput.WriteLine(string.Format("openssl pkeyutl -decrypt -inkey {0} -in {1} -out {2}",
+                        UsePassword._PrivPath, UsePassword._ENCPath, UsePassword._Path));
+                process.StandardInput.WriteLine(string.Format("cd {0} && {1} -ssh {2}@{3} 22 -pwfile {4}", _path, _name, _user, _IP, UsePassword._Path));
+                Thread.Sleep(1000);
+                process.StandardInput.WriteLine(string.Format("del {0}", UsePassword._Path));
                 process.StandardInput.Close();
 
                 process.WaitForExit();
@@ -110,7 +115,7 @@ namespace ForStartingApp
             string type = "FILEZILLA";
 
             _user = tBoxUserName.Text;
-            _password = tBoxPassword.Text;
+            _password = "";
             _IP = tBoxIp.Text;
             _path = UseApplication.GetPath(type);
             _name = UseApplication.GetName(type);
@@ -147,7 +152,7 @@ namespace ForStartingApp
             string type = "MOBAXTERM";
 
             _user = tBoxUserName.Text;
-            _password = tBoxPassword.Text;
+            _password = "";
             _IP = tBoxIp.Text;
             _path = UseApplication.GetPath(type);
             _name = UseApplication.GetName(type);
@@ -260,10 +265,7 @@ namespace ForStartingApp
             usX._UserName = tBoxUserName.Text;
             usX._IPAddress = tBoxIp.Text;
 
-            PassworldTXT passT = new PassworldTXT();
-            passT._Passworld = tBoxPassword.Text;
-
-            UsePassword.Save(passT);
+            
 
 
             UseUserState.Save(usX);
@@ -272,16 +274,26 @@ namespace ForStartingApp
                 UseUserState.Load();
                 pBoxGreen.Visible = true;
                 pBoxRed.Visible = false;
-                lblState.Text = "등록";
                 MessageBox.Show("등록되었습니다 !");
             }
             else
             {
                 pBoxGreen.Visible = false;
                 pBoxRed.Visible = true;
-                lblState.Text = "미등록";
                 MessageBox.Show("접속 아이디 또는 아이피를 입력해주세요.");
             }
+        }
+
+        private void btnPassRegi_Click(object sender, EventArgs e)
+        {
+            InputBox inputBox = new InputBox();
+            inputBox.ShowDialog();
+
+            
+            PassworldTXT passT = new PassworldTXT();
+            passT._Passworld = inputBox.Password;
+
+            UsePassword.Save(passT);
         }
     }
 }
