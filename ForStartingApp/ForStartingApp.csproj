@@ -99,5 +99,11 @@
   <ItemGroup>
     <None Include="Resources\Green-Light-PNG-Transparent-Image.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\remove.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
